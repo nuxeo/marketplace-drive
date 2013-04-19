@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.nuxeo.ecm.distribution</groupId>
     <artifactId>nuxeo-distribution</artifactId>
-    <version>5.6.0-HF16-SNAPSHOT</version>
+    <version>5.6.0-HF15</version>
   </parent>
 
   <groupId>org.nuxeo.marketplace.drive</groupId>
@@ -13,6 +13,7 @@
   <version>1.0.1-SNAPSHOT</version>
   <name>Nuxeo Drive Marketplace Parent</name>
   <properties>
+    <nuxeo.drive.version>5.6.0-SNAPSHOT</nuxeo.drive.version>
     <marketplace.drive.version>1.0.1-SNAPSHOT</marketplace.drive.version>
   </properties>
 
@@ -29,6 +30,26 @@
         <artifactId>marketplace</artifactId>
         <version>${marketplace.drive.version}</version>
         <type>zip</type>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm</groupId>
+        <artifactId>nuxeo-drive-core</artifactId>
+        <version>${nuxeo.drive.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm</groupId>
+        <artifactId>nuxeo-drive-jsf</artifactId>
+        <version>${nuxeo.drive.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm</groupId>
+        <artifactId>nuxeo-drive-operations</artifactId>
+        <version>${nuxeo.drive.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm</groupId>
+        <artifactId>nuxeo-drive-hierarchy-permission</artifactId>
+        <version>${nuxeo.drive.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

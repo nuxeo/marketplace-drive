@@ -23,22 +23,18 @@
     <dependency>
       <groupId>org.nuxeo.ecm.platform</groupId>
       <artifactId>nuxeo-platform-login-token</artifactId>
-      <version>${nuxeo.addons.version}</version>
     </dependency>
     <dependency>
       <groupId>org.nuxeo.ecm</groupId>
       <artifactId>nuxeo-drive-core</artifactId>
-      <version>${nuxeo.addons.version}</version>
     </dependency>
     <dependency>
       <groupId>org.nuxeo.ecm</groupId>
       <artifactId>nuxeo-drive-jsf</artifactId>
-      <version>${nuxeo.addons.version}</version>
     </dependency>
     <dependency>
       <groupId>org.nuxeo.ecm</groupId>
       <artifactId>nuxeo-drive-operations</artifactId>
-      <version>${nuxeo.addons.version}</version>
     </dependency>
   </dependencies>
 
