@@ -3,13 +3,15 @@
   <vendor>Nuxeo</vendor>
   <installer restart="true" />
   <uninstaller restart="true" />
-  <!-- <hotreload-support>false</hotreload-support> -->
-  <!-- <require-terms-and-conditions-acceptance>false -->
-  <!-- </require-terms-and-conditions-acceptance> -->
+  <hotreload-support>true</hotreload-support>
+  <require-terms-and-conditions-acceptance>true</require-terms-and-conditions-acceptance>
+  <nuxeo-validation>nuxeo_certified</nuxeo-validation>
+  <production-state>production_ready</production-state>
+  <supported>true</supported>
   <platforms>
     <platform>cap-@NUXEO_VERSION@</platform>
     <platform>cap-5.6</platform>
   </platforms>
-  <license>LGPL</license>
-  <license-url>http://www.gnu.org/licenses/lgpl.html</license-url>
+  <license>AL 2.0</license>
+  <license-url>http://www.apache.org/licenses/LICENSE-2.0.html</license-url>
 </package>
