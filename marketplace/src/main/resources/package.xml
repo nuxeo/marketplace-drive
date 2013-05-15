@@ -1,5 +1,5 @@
 <package type="addon" name="nuxeo-drive" version="@VERSION@">
-  <title>Nuxeo Drive Marketplace Package</title>
+  <title>Nuxeo Drive</title>
   <vendor>Nuxeo</vendor>
   <installer restart="true" />
   <uninstaller restart="true" />
