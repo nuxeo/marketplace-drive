@@ -11,6 +11,13 @@
   <packaging>zip</packaging>
   <name>Marketplace package for Nuxeo Drive</name>
 
+  <properties>
+    <!-- Binary installers to fetch and package inside the drive template -->
+    <!-- Override properties to change URLs; use -Dnofetch to skip packaging -->
+    <msi.url>http://qa.nuxeo.org/jenkins/job/addons_nuxeo-drive-master-msi</msi.url>
+    <dmg.url>http://qa.nuxeo.org/jenkins/job/addons_nuxeo-drive-master-dmg</dmg.url>
+  </properties>
+
   <build>
     <plugins>
       <plugin>
