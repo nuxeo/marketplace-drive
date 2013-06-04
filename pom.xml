@@ -12,7 +12,7 @@
   <version>1.0.3-SNAPSHOT</version>
   <name>Nuxeo Drive Marketplace Parent</name>
   <properties>
-    <nuxeo.drive.version>5.6.0-SNAPSHOT</nuxeo.drive.version>
+    <nuxeo.drive.version>5.6.0-HF19-SNAPSHOT</nuxeo.drive.version>
     <marketplace.drive.version>1.0.3-SNAPSHOT</marketplace.drive.version>
   </properties>
 
