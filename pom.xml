@@ -9,11 +9,11 @@
   <groupId>org.nuxeo.marketplace.drive</groupId>
   <artifactId>parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.4-SNAPSHOT</version>
   <name>Nuxeo Drive Marketplace Parent</name>
   <properties>
     <nuxeo.drive.version>5.6.0-HF19-SNAPSHOT</nuxeo.drive.version>
-    <marketplace.drive.version>1.0.3-SNAPSHOT</marketplace.drive.version>
+    <marketplace.drive.version>1.0.4-SNAPSHOT</marketplace.drive.version>
   </properties>
 
   <dependencyManagement>
