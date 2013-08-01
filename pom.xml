@@ -25,7 +25,7 @@
       </dependency>
       <dependency>
         <groupId>org.nuxeo.marketplace.drive</groupId>
-        <artifactId>marketplace</artifactId>
+        <artifactId>nuxeo-drive</artifactId>
         <version>${marketplace.drive.version}</version>
         <type>zip</type>
       </dependency>
