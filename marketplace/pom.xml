@@ -7,7 +7,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>marketplace</artifactId>
+  <artifactId>nuxeo-drive</artifactId>
   <packaging>zip</packaging>
   <name>Marketplace package for Nuxeo Drive</name>
 
