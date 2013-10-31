@@ -3,16 +3,16 @@
   <parent>
     <groupId>org.nuxeo.ecm.distribution</groupId>
     <artifactId>nuxeo-distribution</artifactId>
-    <version>5.8</version>
+    <version>5.8-HF01-SNAPSHOT</version>
   </parent>
 
   <groupId>org.nuxeo.marketplace.drive</groupId>
   <artifactId>parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.2.1-SNAPSHOT</version>
   <name>Nuxeo Drive Marketplace Parent</name>
   <properties>
-    <marketplace.drive.version>1.2-SNAPSHOT</marketplace.drive.version>
+    <marketplace.drive.version>1.2.1-SNAPSHOT</marketplace.drive.version>
   </properties>
 
   <dependencyManagement>
