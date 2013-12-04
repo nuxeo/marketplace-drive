@@ -19,10 +19,6 @@
       <type>pom</type>
     </dependency>
     <dependency>
-      <groupId>org.nuxeo.ecm.platform</groupId>
-      <artifactId>nuxeo-platform-login-token</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.nuxeo.ecm</groupId>
       <artifactId>nuxeo-drive-core</artifactId>
     </dependency>
