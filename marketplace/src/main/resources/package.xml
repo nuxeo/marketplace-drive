@@ -13,7 +13,7 @@
     <platform>cap-5.8</platform>
   </platforms>
   <dependencies>
-    <package>nuxeo-5.8.0-HF03</package>
+    <package>nuxeo-5.8.0-HF04</package>
   </dependencies>
   <license>AL 2.0</license>
   <license-url>http://www.apache.org/licenses/LICENSE-2.0.html</license-url>
