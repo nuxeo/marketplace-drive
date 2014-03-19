@@ -3,3 +3,6 @@ drive.target=.
 
 # HTTP status code for Automation server permission exception
 org.nuxeo.ecm.automation.server.permission.httpcode=403
+
+# Drive update site URL
+org.nuxeo.drive.update.site.url=http://community.nuxeo.com/static/drive/
