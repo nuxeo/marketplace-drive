@@ -9,15 +9,9 @@
   <production-state>production_ready</production-state>
   <supported>true</supported>
   <platforms>
-    <platform>cap-@NUXEO_VERSION@</platform>
+    <platform>cap-5.6.0-HF*</platform>
     <platform>cap-5.6</platform>
   </platforms>
-  <!-- Uncomment and set to latest released Hotfix when preparing release -->
-  <!--
-  <dependencies>
-    <package>nuxeo-5.6.0-HFXX</package>
-  </dependencies>
-  -->
   <license>AL 2.0</license>
   <license-url>http://www.apache.org/licenses/LICENSE-2.0.html</license-url>
 </package>
