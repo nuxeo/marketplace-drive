@@ -15,7 +15,6 @@
         <filter token="NUXEO_VERSION" value="${nuxeo.addons.version}" />
       </filterset>
     </copy>
-    <antcall target="fetch-installers" />
     <copy todir="${outdir}">
       <artifact:resolveFile key="org.nuxeo.ecm.distribution:nuxeo-distribution-cap::zip" />
       <artifact:resolveFile key="org.nuxeo.marketplace.drive:nxr::zip" />
@@ -66,17 +65,6 @@
     <artifact:attach file="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip"
          target="${maven.project.groupId}:${maven.project.artifactId}"
          type="zip" />
-  </target>
-
-  <target name="fetch-installers" description="Fecth Nuxeo Drive installers" unless="nofetch">
-    <exec executable="python" error="target/fetch.err">
-      <!-- <env key="PYTHONPATH" path="src/main/python" /> -->
-      <arg value="${basedir}/../tools/fetch_installer_packages.py" />
-      <arg value="fetch-installers" />
-      <arg value="--msi-url=${msi.url}" />
-      <arg value="--dmg-url=${dmg.url}" />
-      <arg value="--base-folder=." />
-    </exec>
   </target>
 
 </project>
