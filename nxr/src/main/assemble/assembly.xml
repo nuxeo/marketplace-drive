@@ -1,7 +1,10 @@
-<project name="nuxeo-assembly" default="build" xmlns:nx="urn:nuxeo-build"
-  xmlns:artifact="urn:nuxeo-artifact">
+<project name="drive-assembly"
+         default="build"
+         xmlns:nx="urn:nuxeo-build"
+         xmlns:artifact="urn:nuxeo-artifact">
   <taskdef resource="org/nuxeo/build/antlib.xml" uri="urn:nuxeo-build" />
-  <taskdef resource="org/nuxeo/build/artifact/antlib.xml" uri="urn:nuxeo-artifact" />
+  <taskdef resource="org/nuxeo/build/artifact/antlib.xml"
+           uri="urn:nuxeo-artifact" />
 
   <target name="init" unless="init.done">
     <property name="outdir" value="${maven.project.build.directory}" />
@@ -12,24 +15,25 @@
   </target>
 
   <target name="expand">
-    <artifact:nuxeo-expand includeTestScope="true"
-      groupPrefixes="org.nuxeo" />
+    <artifact:nuxeo-expand includeTestScope="true" groupPrefixes="org.nuxeo" />
     <artifact:print output="${outdir}/artifacts-nuxeo-drive.properties"
-      mode="sdk" />
+                    mode="sdk" />
     <artifact:print output="${outdir}/test-artifacts-nuxeo-drive.properties"
-      mode="sdk" scopes="test" />
+                    mode="sdk"
+                    scopes="test" />
     <artifact:print output="${outdir}/dependency-tree.log" />
   </target>
 
   <target name="build" depends="init" description="Build Nuxeo Drive NXR">
-    <echo>Building default Nuxeo Drive NXR</echo>
+    <echo level="info">Building default Nuxeo Drive NXR</echo>
     <delete failonerror="false" dir="${nuxeo.nxr}" />
     <mkdir dir="${nuxeo.nxr}" />
     <antcall target="build-standard" />
   </target>
 
-  <target name="build-standard" description="Build default distribution"
-    depends="init">
+  <target name="build-standard"
+          description="Build default distribution"
+          depends="init">
     <copy todir="${nuxeo.nxr}/bundles" overwrite="true">
       <artifact:set>
         <includes>
@@ -40,16 +44,15 @@
 
     <antcall target="third-party-libraries" />
 
-    <copy file="${outdir}/artifacts-nuxeo-drive.properties" todir="${nuxeo.nxr}" />
-    <copy file="${outdir}/test-artifacts-nuxeo-drive.properties" todir="${nuxeo.nxr}" />
+    <copy file="${outdir}/artifacts-nuxeo-drive.properties"
+          todir="${nuxeo.nxr}" />
+    <copy file="${outdir}/test-artifacts-nuxeo-drive.properties"
+          todir="${nuxeo.nxr}" />
 
-    <zip
-      destfile="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip"
-      basedir="${nuxeo.nxr}" />
-    <artifact:attach
-      file="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip"
-      target="${maven.project.groupId}:${maven.project.artifactId}"
-      type="zip" />
+    <zip destfile="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip"
+         basedir="${nuxeo.nxr}" />
+    <artifact:attach file="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip"
+                     type="zip" />
   </target>
 
   <target name="third-party-libraries">
