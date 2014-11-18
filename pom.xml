@@ -12,7 +12,6 @@
   <version>1.4.2-SNAPSHOT</version>
   <name>Nuxeo Drive Marketplace Parent</name>
   <properties>
-    <nuxeo.drive.version>6.0-HF01-I20141118_1148</nuxeo.drive.version>
     <marketplace.drive.version>1.4.2-SNAPSHOT</marketplace.drive.version>
   </properties>
 
