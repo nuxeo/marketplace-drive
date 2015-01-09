@@ -9,7 +9,8 @@
   <production-state>production_ready</production-state>
   <supported>true</supported>
   <platforms>
-    <platform>cap-@NUXEO_VERSION@</platform>
+    <platform>cap-@TARGET_VERSION@</platform>
+    <platform>cap-@TARGET_VERSION@-HF*</platform>
   </platforms>
   <license>AL 2.0</license>
   <license-url>http://www.apache.org/licenses/LICENSE-2.0.html</license-url>
