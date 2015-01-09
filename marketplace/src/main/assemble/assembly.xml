@@ -15,7 +15,7 @@
       <fileset dir="src/main/resources" />
       <filterset>
         <filter token="VERSION" value="${maven.project.version}" />
-        <filter token="NUXEO_VERSION" value="${nuxeo.addons.version}" />
+        <filter token="TARGET_VERSION" value="${target.platform.version}" />
       </filterset>
     </copy>
     <copy todir="${outdir}">
