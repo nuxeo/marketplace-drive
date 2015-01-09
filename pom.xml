@@ -14,7 +14,7 @@
   <name>Nuxeo Drive Marketplace Parent</name>
   <properties>
     <marketplace.drive.version>1.4.3-SNAPSHOT</marketplace.drive.version>
-    <target.platform.version>${nuxeo.distribution.version}</target.platform.version>
+    <target.platform.version>6.0</target.platform.version>
   </properties>
 
   <dependencyManagement>
