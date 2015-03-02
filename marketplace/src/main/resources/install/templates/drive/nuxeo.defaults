@@ -3,3 +3,7 @@ drive.target=.
 
 # Drive update site URL
 org.nuxeo.drive.update.site.url=http://community.nuxeo.com/static/drive/
+
+# Use new Drive Edit URL form:
+# nxdrive://edit/scheme/server[:port]/webappName/user/userName/repo/repoName/nxdocid/docId/filename/fileName/downloadUrl/downloadUrl
+org.nuxeo.drive.new.edit.url=true
