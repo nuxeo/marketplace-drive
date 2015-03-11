@@ -6,3 +6,6 @@ org.nuxeo.ecm.automation.server.permission.httpcode=403
 
 # Drive update site URL
 org.nuxeo.drive.update.site.url=http://community.nuxeo.com/static/drive/
+
+# Drive beta update site URL
+org.nuxeo.drive.beta.update.site.url=http://community.nuxeo.com/static/drive-tests/
