@@ -12,6 +12,19 @@
   <packaging>zip</packaging>
   <name>Marketplace package for Nuxeo Drive</name>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.nuxeo.ecm.distribution</groupId>
+      <artifactId>nuxeo-distribution-cap</artifactId>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.marketplace.drive</groupId>
+      <artifactId>nxr</artifactId>
+      <type>zip</type>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>
