@@ -1,5 +1,6 @@
 <package type="addon" name="nuxeo-drive" version="@VERSION@">
   <title>Nuxeo Drive</title>
+  <home-page>https://doc.nuxeo.com/x/04HQ</home-page>
   <vendor>Nuxeo</vendor>
   <installer restart="true" />
   <uninstaller restart="true" />
