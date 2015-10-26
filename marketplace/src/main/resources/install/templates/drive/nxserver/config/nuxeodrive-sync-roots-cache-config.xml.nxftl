@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.drive.sync.roots.cache">
+
+  <#if "${nuxeo.redis.enabled}" == "true">
+    <#assign className = "org.nuxeo.ecm.core.redis.contribs.RedisCache" />
+  <#else>
+    <#assign className = "org.nuxeo.ecm.core.cache.InMemoryCacheImpl" />
+  </#if>
+
+  <extension target="org.nuxeo.ecm.core.cache.CacheService" point="caches">
+
+    <cache name="driveSyncRoot" class="${className}">
+      <option name="maxSize">10000</option>
+      <option name="concurrencyLevel">4</option>
+      <ttl>1</ttl>
+    </cache>
+
+    <cache name="driveCollectionSyncRootMember" class="${className}">
+      <option name="maxSize">10000</option>
+      <option name="concurrencyLevel">4</option>
+      <ttl>1</ttl>
+    </cache>
+
+  </extension>
+
+</component>
+
