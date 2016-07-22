@@ -28,10 +28,13 @@
     <copy todir="${nuxeo.nxr}/bundles" overwrite="true">
       <artifact:set>
         <includes>
-          <artifact groupId="org.nuxeo*" scope="!test" type="!pom" />
+          <artifact groupId="org.nuxeo*" />
         </includes>
         <excludes>
           <artifact groupId="org.nuxeo.lib*" />
+          <artifact scope="test" />
+          <artifact scope="provided" />
+          <artifact type="pom" />
         </excludes>
       </artifact:set>
     </copy>
