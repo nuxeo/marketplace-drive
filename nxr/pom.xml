@@ -32,6 +32,10 @@
     </dependency>
     <dependency>
       <groupId>org.nuxeo.ecm</groupId>
+      <artifactId>nuxeo-drive-web-ui</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm</groupId>
       <artifactId>nuxeo-drive-operations</artifactId>
     </dependency>
   </dependencies>

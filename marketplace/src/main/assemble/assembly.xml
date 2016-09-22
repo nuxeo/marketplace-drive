@@ -30,11 +30,32 @@
       <patternset refid="nuxeo-drive.versus.cap" />
     </unzip>
 
+    <!-- Separate UI packages -->
+    <mkdir dir="${outdir}/marketplace/install/bundles-jsf-ui" />
+    <move todir="${outdir}/marketplace/install/bundles-jsf-ui">
+      <fileset dir="${outdir}/marketplace/install/bundles">
+        <include name="nuxeo-drive-jsf-*.jar" />
+      </fileset>
+    </move>
+    <mkdir dir="${outdir}/marketplace/install/bundles-web-ui" />
+    <move todir="${outdir}/marketplace/install/bundles-web-ui">
+      <fileset dir="${outdir}/marketplace/install/bundles">
+        <include name="nuxeo-drive-web-ui-*.jar" />
+      </fileset>
+    </move>
+
     <!-- Generate install.xml file -->
     <var name="install.content" value="&lt;install&gt;" />
     <var name="install.content"
          value="${install.content}${line.separator}
   &lt;update file=&quot;${package.root}/install/bundles&quot; todir=&quot;${env.bundles}&quot; /&gt;" />
+    <!-- UI packages check -->
+    <var name="install.content"
+         value="${install.content}${line.separator}
+   &lt;update file=&quot;${package.root}/install/bundles-jsf-ui&quot; todir=&quot;${env.bundles}&quot; if=&quot;Packages.contains('nuxeo-jsf-ui')&quot; /&gt;" />
+    <var name="install.content"
+         value="${install.content}${line.separator}
+   &lt;update file=&quot;${package.root}/install/bundles-web-ui&quot; todir=&quot;${env.bundles}&quot; if=&quot;Packages.contains('nuxeo-web-ui')&quot; /&gt;" />
     <if>
       <available file="${outdir}/marketplace/install/lib" />
       <then>
