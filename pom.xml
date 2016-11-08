@@ -20,19 +20,12 @@
     <dependencies>
       <dependency>
         <groupId>org.nuxeo.marketplace.drive</groupId>
-        <artifactId>nxr</artifactId>
-        <version>${marketplace.drive.version}</version>
-        <type>zip</type>
-      </dependency>
-      <dependency>
-        <groupId>org.nuxeo.marketplace.drive</groupId>
         <artifactId>nuxeo-drive</artifactId>
         <version>${marketplace.drive.version}</version>
         <type>zip</type>
       </dependency>
     </dependencies>
   </dependencyManagement>
-
 
   <repositories>
     <repository>
@@ -58,7 +51,6 @@
   </repositories>
 
   <modules>
-    <module>nxr</module>
     <module>marketplace</module>
   </modules>
 

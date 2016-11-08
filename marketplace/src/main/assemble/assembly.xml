@@ -5,83 +5,197 @@
 
   <target name="build" description="Build Nuxeo Drive Marketplace package">
     <property name="outdir" value="${maven.project.build.directory}" />
+    <artifact:nuxeo-expand includeTestScope="true" groupPrefixes="org.nuxeo" />
+    <artifact:print output="${outdir}/artifacts-drive.properties" mode="sdk" />
+    <artifact:print output="${outdir}/test-artifacts-drive.properties" mode="sdk" scopes="test" />
+    <artifact:print output="${outdir}/dependency-tree.log" />
     <tstamp />
+
+    <delete failonerror="false" dir="${outdir}/nxr" />
+    <mkdir dir="${outdir}/nxr" />
     <delete failonerror="false" dir="${outdir}/marketplace" />
     <mkdir dir="${outdir}/marketplace" />
     <copy todir="${outdir}/marketplace">
       <fileset dir="src/main/resources" />
       <filterset>
         <filter token="VERSION" value="${maven.project.version}" />
-        <filter token="TARGET_VERSION" value="${target.platform.version}" />
+        <filter token="DISTRIB_VERSION" value="${target.platform.version}" />
       </filterset>
     </copy>
+    <copy file="${outdir}/artifacts-drive.properties" todir="${outdir}/marketplace/install" />
+    <copy file="${outdir}/test-artifacts-drive.properties" todir="${outdir}/marketplace/install" />
+
+    <!-- Base distribution NXR -->
     <copy todir="${outdir}">
-      <artifact:file key="org.nuxeo.ecm.distribution:nuxeo-distribution-cap::zip" />
-      <artifact:file key="org.nuxeo.marketplace.drive:nxr::zip" />
+      <artifact:file key="org.nuxeo.ecm.distribution:nuxeo-nxr-server::zip" />
     </copy>
+    <!-- JSF UI NXR -->
+    <copy todir="${outdir}">
+      <artifact:file key="org.nuxeo.ecm.distribution:nuxeo-nxr-jsf-ui::zip" />
+    </copy>
+
+    <!-- Drive Core -->
+    <!-- Nuxeo bundles -->
+    <copy todir="${outdir}/nxr/bundles" overwrite="true">
+      <artifact:dependencies key="org.nuxeo.ecm:nuxeo-drive-core-dependencies::pom">
+        <includes>
+          <artifact groupId="org.nuxeo*" />
+        </includes>
+        <excludes>
+          <artifact groupId="org.nuxeo.lib*" />
+          <artifact scope="test" />
+          <artifact scope="provided" />
+          <artifact type="pom" />
+        </excludes>
+      </artifact:dependencies>
+    </copy>
+    <!-- Third-party libraries -->
+    <copy todir="${outdir}/nxr/lib" overwrite="true">
+      <artifact:dependencies key="org.nuxeo.ecm:nuxeo-drive-core-dependencies::pom">
+        <includes>
+          <artifact groupId="!org.nuxeo*" />
+          <artifact groupId="org.nuxeo.lib*" />
+        </includes>
+        <excludes>
+          <artifact scope="test" />
+        </excludes>
+      </artifact:dependencies>
+    </copy>
+    <nx:rmdups dir="${outdir}/nxr/lib" />
+    <zip destfile="${outdir}/nxr-${maven.project.version}.zip" basedir="${outdir}/nxr" />
+    <!-- Diff against Nuxeo Server -->
     <nx:zipdiff file1="${outdir}/nxr-${maven.project.version}.zip"
-                file2="${outdir}/nuxeo-distribution-cap-${nuxeo.distribution.version}.zip"
+                file2="${outdir}/nuxeo-nxr-server-${nuxeo.distribution.version}.zip"
                 includesfile="${outdir}/includes"
                 excludesfile="${outdir}/excludesfile"
-                patternsetid="nuxeo-drive.versus.cap"
-                ignoreContentPattern=".*jar$">
+                patternsetid="drive.versus.server">
     </nx:zipdiff>
     <unzip src="${outdir}/nxr-${maven.project.version}.zip" dest="${outdir}/marketplace/install">
-      <patternset refid="nuxeo-drive.versus.cap" />
+      <patternset refid="drive.versus.server" />
     </unzip>
 
-    <!-- Separate UI packages -->
-    <mkdir dir="${outdir}/marketplace/install/bundles-jsf-ui" />
-    <move todir="${outdir}/marketplace/install/bundles-jsf-ui">
-      <fileset dir="${outdir}/marketplace/install/bundles">
-        <include name="nuxeo-drive-jsf-*.jar" />
-      </fileset>
-    </move>
-    <mkdir dir="${outdir}/marketplace/install/bundles-web-ui" />
-    <move todir="${outdir}/marketplace/install/bundles-web-ui">
-      <fileset dir="${outdir}/marketplace/install/bundles">
-        <include name="nuxeo-drive-web-ui-*.jar" />
-      </fileset>
-    </move>
+    <!-- Drive JSF -->
+    <!-- Nuxeo bundles -->
+    <copy todir="${outdir}/nxr/bundles" overwrite="true">
+      <artifact:dependencies key="org.nuxeo.ecm:nuxeo-drive-jsf:::">
+        <includes>
+          <artifact groupId="org.nuxeo*" />
+        </includes>
+        <excludes>
+          <artifact groupId="org.nuxeo.lib*" />
+          <artifact scope="test" />
+          <artifact scope="provided" />
+          <artifact type="pom" />
+        </excludes>
+      </artifact:dependencies>
+    </copy>
+    <!-- Third-party libraries -->
+    <copy todir="${outdir}/nxr/lib" overwrite="true">
+      <artifact:dependencies key="org.nuxeo.ecm:nuxeo-drive-jsf:::">
+        <includes>
+          <artifact groupId="!org.nuxeo*" />
+          <artifact groupId="org.nuxeo.lib*" />
+        </includes>
+        <excludes>
+          <artifact scope="test" />
+        </excludes>
+      </artifact:dependencies>
+    </copy>
+    <nx:rmdups dir="${outdir}/nxr/lib" />
+    <unzip src="${outdir}/nuxeo-nxr-server-${nuxeo.distribution.version}.zip"
+           dest="${outdir}/nuxeo-nxr-server-jsf-ui" />
+    <unzip src="${outdir}/nuxeo-nxr-jsf-ui-${nuxeo.distribution.version}.zip"
+           dest="${outdir}/nuxeo-nxr-server-jsf-ui" />
+    <unzip src="${outdir}/nxr-${maven.project.version}.zip" dest="${outdir}/nuxeo-nxr-server-jsf-ui" />
+    <zip destfile="${outdir}/nuxeo-nxr-server-jsf-ui-${nuxeo.distribution.version}.zip"
+         basedir="${outdir}/nuxeo-nxr-server-jsf-ui" />
+    <zip destfile="${outdir}/nxr-${maven.project.version}.zip" basedir="${outdir}/nxr" />
+    <!-- Diff against Nuxeo Server + JSF UI -->
+    <nx:zipdiff file1="${outdir}/nxr-${maven.project.version}.zip"
+                file2="${outdir}/nuxeo-nxr-server-jsf-ui-${nuxeo.distribution.version}.zip"
+                includesfile="${outdir}/includes"
+                excludesfile="${outdir}/excludesfile"
+                patternsetid="drive.versus.jsf"
+                ignoreContent="false"
+                ignoreContentPattern=".*\.jar$">
+    </nx:zipdiff>
+    <unzip src="${outdir}/nxr-${maven.project.version}.zip" dest="${outdir}/marketplace/install">
+      <patternset refid="drive.versus.jsf" />
+      <firstmatchmapper>
+        <globmapper from="bundles/*" to="bundles-jsf-ui/*" />
+        <globmapper from="lib/*" to="lib-jsf-ui/*" />
+      </firstmatchmapper>
+    </unzip>
 
-    <!-- Generate install.xml file -->
-    <var name="install.content" value="&lt;install&gt;" />
-    <var name="install.content"
-         value="${install.content}${line.separator}
+    <!-- Add Web UI bundles -->
+    <copy todir="${outdir}/marketplace/install/bundles-web-ui">
+      <artifact:resolveFile key="org.nuxeo.ecm:nuxeo-drive-web-ui" />
+    </copy>
+
+    <!-- Generate install.xml content -->
+    <var name="install.bundles" value="" />
+    <var name="install.bundles"
+         value="${line.separator}
   &lt;update file=&quot;${package.root}/install/bundles&quot; todir=&quot;${env.bundles}&quot; /&gt;" />
-    <!-- UI packages check -->
-    <var name="install.content"
-         value="${install.content}${line.separator}
-   &lt;update file=&quot;${package.root}/install/bundles-jsf-ui&quot; todir=&quot;${env.bundles}&quot; if=&quot;Packages.contains('nuxeo-jsf-ui')&quot; /&gt;" />
-    <var name="install.content"
-         value="${install.content}${line.separator}
-   &lt;update file=&quot;${package.root}/install/bundles-web-ui&quot; todir=&quot;${env.bundles}&quot; if=&quot;Packages.contains('nuxeo-web-ui')&quot; /&gt;" />
+    <var name="install.bundles"
+         value="${install.bundles}${line.separator}
+  &lt;update file=&quot;${package.root}/install/bundles-jsf-ui&quot; todir=&quot;${env.bundles}&quot; if=&quot;Packages.contains('nuxeo-jsf-ui')&quot; /&gt;" />
+    <var name="install.bundles"
+         value="${install.bundles}${line.separator}
+  &lt;update file=&quot;${package.root}/install/bundles-web-ui&quot; todir=&quot;${env.bundles}&quot; if=&quot;Packages.contains('nuxeo-web-ui')&quot; /&gt;" />
+
+    <var name="install.libs" value="" />
     <if>
       <available file="${outdir}/marketplace/install/lib" />
       <then>
-        <var name="install.content"
-             value="${install.content}${line.separator}
+        <var name="install.libs"
+             value="${line.separator}
   &lt;update file=&quot;${package.root}/install/lib&quot; todir=&quot;${env.lib}&quot; /&gt;" />
       </then>
     </if>
-    <var name="install.content"
-         value="${install.content}${line.separator}
-  &lt;copy file=&quot;${package.root}/install/artifacts-nuxeo-drive.properties&quot;${line.separator}
+    <if>
+      <available file="${outdir}/marketplace/install/lib-jsf-ui" />
+      <then>
+        <var name="install.libs"
+             value="${install.libs}${line.separator}
+  &lt;update file=&quot;${package.root}/install/lib-jsf-ui&quot; todir=&quot;${env.lib}&quot; if=&quot;Packages.contains('nuxeo-jsf-ui')&quot; /&gt;" />
+      </then>
+    </if>
+    <if>
+      <available file="${outdir}/marketplace/install/lib-web-ui" />
+      <then>
+        <var name="install.libs"
+             value="${install.libs}${line.separator}
+          &lt;update file=&quot;${package.root}/install/lib-web-ui&quot; todir=&quot;${env.lib}&quot; if=&quot;Packages.contains('nuxeo-web-ui')&quot; /&gt;" />
+      </then>
+    </if>
+
+    <var name="install.properties"
+         value="${line.separator}
+  &lt;copy file=&quot;${package.root}/install/artifacts-drive.properties&quot;${line.separator}
     todir=&quot;${env.server.home}/sdk&quot; overwrite=&quot;true&quot; /&gt;${line.separator}
-  &lt;copy file=&quot;${package.root}/install/test-artifacts-nuxeo-drive.properties&quot;${line.separator}
+  &lt;copy file=&quot;${package.root}/install/test-artifacts-drive.properties&quot;${line.separator}
     todir=&quot;${env.server.home}/sdk&quot; overwrite=&quot;true&quot; /&gt;" />
+
+    <var name="install.templates" value="" />
     <if>
       <available file="${outdir}/marketplace/install/templates" />
       <then>
-        <var name="install.content"
-             value="${install.content}${line.separator}
+        <var name="install.templates"
+             value="${line.separator}
   &lt;copy dir=&quot;${package.root}/install/templates&quot; todir=&quot;${env.templates}&quot; overwrite=&quot;true&quot; /&gt;${line.separator}
-  &lt;config addtemplate=&quot;drive&quot; /&gt;" />
+  &lt;config addtemplate=&quot;drive&quot; /&gt;${line.separator}" />
       </then>
     </if>
-    <var name="install.content" value="${install.content}${line.separator}
-&lt;/install&gt;${line.separator}" />
-    <echo file="${outdir}/marketplace/install.xml" message="${install.content}" />
+
+    <copy file="src/main/resources/install.xml" todir="${outdir}/marketplace" overwrite="true">
+      <filterset>
+        <filter token="BUNDLES" value="${install.bundles}" />
+        <filter token="LIBS" value="${install.libs}" />
+        <filter token="PROPERTIES" value="${install.properties}" />
+        <filter token="TEMPLATES" value="${install.templates}" />
+      </filterset>
+    </copy>
 
     <zip destfile="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip"
          basedir="${outdir}/marketplace" />
