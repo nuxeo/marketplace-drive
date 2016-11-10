@@ -10,7 +10,8 @@
   <production-state>production_ready</production-state>
   <supported>true</supported>
   <platforms>
-    <platform>server-@DISTRIB_VERSION@*</platform>
+    <platform>server-@DISTRIB_VERSION@</platform>
+    <platform>server-@DISTRIB_VERSION@-*</platform>
   </platforms>
   <optional-dependencies>
     <package>nuxeo-jsf-ui</package>
