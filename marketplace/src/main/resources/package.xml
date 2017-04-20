@@ -1,7 +1,7 @@
 <package type="addon" name="nuxeo-drive" version="@VERSION@">
   <title>Nuxeo Drive</title>
   <description>Nuxeo Drive enables bidirectional synchronization of content between the local desktop and the Nuxeo content repository. It handles offline modification of files and deals with concurrent updates.</description>
-  <home-page>https://doc.nuxeo.com/x/04HQ</home-page>
+  <home-page>https://doc.nuxeo.com/nxdoc/nuxeo-drive/</home-page>
   <vendor>Nuxeo</vendor>
   <installer restart="true" />
   <uninstaller restart="true" />
