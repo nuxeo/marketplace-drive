@@ -8,5 +8,5 @@
   "handshake_timeout": 60,
   "beta_channel": false,
   "update_check_delay": 3600,
-  "ui": "web"
+  "ui": "jsf"
 }
