@@ -21,6 +21,12 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm.distribution</groupId>
+        <artifactId>nuxeo-nxr-jsf-ui</artifactId>
+        <type>zip</type>
+        <version>${nuxeo.distribution.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
