@@ -3,17 +3,17 @@
   <parent>
     <groupId>org.nuxeo.ecm.distribution</groupId>
     <artifactId>nuxeo-distribution</artifactId>
-    <version>10.10-HF36</version>
+    <version>10.10-HF37-SNAPSHOT</version>
   </parent>
 
   <groupId>org.nuxeo.marketplace.drive</groupId>
   <artifactId>parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.8.6</version>
+  <version>1.8.7-SNAPSHOT</version>
   <name>Nuxeo Drive Marketplace Parent</name>
   <properties>
-    <marketplace.drive.version>1.8.6</marketplace.drive.version>
-    <target.platform.version>10.10</target.platform.version>
+    <marketplace.drive.version>1.8.7-SNAPSHOT</marketplace.drive.version>
+    <target.platform.version>${nuxeo.distribution.version}</target.platform.version>
   </properties>
 
   <dependencyManagement>
